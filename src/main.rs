@@ -88,5 +88,4 @@ fn main() {
         }
         f.write(b"\n").unwrap();
     }
-    println!("{:#?}", args);
 }
