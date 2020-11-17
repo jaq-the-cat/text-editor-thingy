@@ -1,6 +1,7 @@
 use ncurses as c;
 use std::env;
 use std::fs;
+use std::{thread::sleep, time::Duration};
 
 fn main() {
     //let args: Vec<_> = env::args().collect();
@@ -12,6 +13,7 @@ fn main() {
     c::initscr();
     let w = c::stdscr();
     c::keypad(w, true);
+    c::nodelay(w, true);
     c::noecho();
     let mut ch;
     loop {
@@ -19,12 +21,10 @@ fn main() {
         let mut maxx = 0;
         c::getmaxyx(w, &mut maxy, &mut maxx);
 
-        c::mv(ln as i32, cl as i32);
         ch = c::getch();
-        if 32 < ch && ch < 127 {
+        if 31 < ch && ch < 127 {
             // valid ASCII
-            c::addch(ch as c::chtype);
-            buffer[ln].push(ch as c::chtype);
+            buffer[ln].insert(cl, ch as u32);
             cl += 1;
         } else {
             match ch {
@@ -58,6 +58,22 @@ fn main() {
                 _ => {}
             }
         }
+        for line in buffer.iter() {
+            for &ch in line {
+                c::addch(ch);
+            }
+            c::mv(c::getcury(w) + 1, 0);
+        }
+        c::refresh();
+        c::mv(ln as i32, cl as i32);
+        sleep(Duration::from_millis(20));
+        c::clear();
     }
     c::endwin();
+    for line in buffer.iter() {
+        for ch in line {
+            print!("{}", ch);
+        }
+        println!("");
+    }
 }
