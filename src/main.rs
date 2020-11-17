@@ -64,8 +64,8 @@ fn main() {
             }
             c::mv(c::getcury(w) + 1, 0);
         }
-        c::refresh();
         c::mv(ln as i32, cl as i32);
+        c::refresh();
         sleep(Duration::from_millis(20));
         c::clear();
     }
