@@ -60,6 +60,12 @@ fn main() {
                         cl += 1;
                     }
                 }
+                c::KEY_BACKSPACE => {
+                    if cl > 0 {
+                        buffer[ln].remove(cl - 1);
+                        cl -= 1;
+                    }
+                }
                 _ => {}
             }
         }
