@@ -45,6 +45,16 @@ fn main() {
                     }
                     cl = buffer[ln].len();
                 }
+                c::KEY_LEFT => {
+                    if cl > 0 {
+                        cl -= 1;
+                    }
+                }
+                c::KEY_RIGHT => {
+                    if cl < buffer[ln].len() {
+                        cl += 1;
+                    }
+                }
                 _ => {}
             }
         }
