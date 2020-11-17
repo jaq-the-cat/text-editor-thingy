@@ -31,6 +31,12 @@ fn main() {
                 c::KEY_END => {
                     break;
                 }
+                c::KEY_UP => {
+                    if ln > 0 {
+                        ln -= 1;
+                        cl = buffer[ln].len();
+                    }
+                }
                 c::KEY_DOWN => {
                     ln += 1;
                     if ln >= lines {
