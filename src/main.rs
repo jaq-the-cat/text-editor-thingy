@@ -72,7 +72,7 @@ fn main() {
     c::endwin();
     for line in buffer.iter() {
         for ch in line {
-            print!("{}", ch);
+            print!("{}", *ch as u8 as char);
         }
         println!("");
     }
