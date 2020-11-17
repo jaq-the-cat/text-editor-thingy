@@ -18,17 +18,24 @@ fn main() {
         let mut maxy = 0;
         let mut maxx = 0;
         c::getmaxyx(w, &mut maxy, &mut maxx);
+
+        c::mv(ln as i32, cl as i32);
         ch = c::getch();
         if 32 < ch && ch < 127 {
             // valid ASCII
             c::addch(ch as c::chtype);
             buffer[ln].push(ch as c::chtype);
+            cl += 1;
         } else {
             match ch {
                 c::KEY_END => {
+                    break;
+                }
+                c::KEY_DOWN => {
                     ln += 1;
                     if ln >= lines {
                         buffer.push(Vec::new());
+                        lines = buffer.len();
                     }
                     cl = buffer[ln].len();
                 }
