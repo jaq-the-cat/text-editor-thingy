@@ -1,10 +1,14 @@
 use ncurses as c;
 use std::env;
-use std::fs;
+//use std::fs;
 use std::{thread::sleep, time::Duration};
 
 fn main() {
-    //let args: Vec<_> = env::args().collect();
+    let args: Vec<_> = env::args().collect();
+    if args.len() < 2 {
+        eprintln!("Usage: `$ tet <filename>`");
+        return;
+    }
     let mut buffer: Vec<Vec<c::chtype>> = vec![Vec::new()];
     let mut lines: usize = 1;
     let mut ln: usize = 0;
@@ -76,4 +80,5 @@ fn main() {
         }
         println!("");
     }
+    println!("{:#?}", args);
 }
