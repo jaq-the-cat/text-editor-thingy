@@ -1,6 +1,7 @@
 use ncurses as c;
 use std::env;
-//use std::fs;
+use std::fs::*;
+use std::io::prelude::*;
 use std::{thread::sleep, time::Duration};
 
 fn main() {
@@ -74,11 +75,12 @@ fn main() {
         c::clear();
     }
     c::endwin();
+    let mut f = File::create(&args[1][..]).unwrap();
     for line in buffer.iter() {
         for ch in line {
-            print!("{}", *ch as u8 as char);
+            f.write(&[*ch as u8]).unwrap();
         }
-        println!("");
+        f.write(b"\n").unwrap();
     }
     println!("{:#?}", args);
 }
