@@ -13,7 +13,7 @@ fn main() {
     let w = c::stdscr();
     c::keypad(w, true);
     c::noecho();
-    let mut ch = 0;
+    let mut ch;
     loop {
         let mut maxy = 0;
         let mut maxx = 0;
