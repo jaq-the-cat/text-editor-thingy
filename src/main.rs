@@ -14,7 +14,6 @@ fn main() {
     let mut lines: usize = 1;
     let mut ln: usize = 0;
     let mut cl: usize = 0;
-    let mut tcl: usize = 0;
     // initialize window
     c::initscr();
     let w = c::stdscr();
