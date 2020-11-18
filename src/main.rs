@@ -14,6 +14,7 @@ fn main() {
     let mut lines: usize = 1;
     let mut ln: usize = 0;
     let mut cl: usize = 0;
+    let mut tcl: usize = 0;
     // initialize window
     c::initscr();
     let w = c::stdscr();
@@ -39,7 +40,9 @@ fn main() {
                 c::KEY_UP => {
                     if ln > 0 {
                         ln -= 1;
-                        cl = buffer[ln].len();
+                        if buffer[ln].len() < cl {
+                            cl = buffer[ln].len();
+                        }
                     }
                 }
                 c::KEY_DOWN => {
@@ -48,7 +51,9 @@ fn main() {
                         buffer.push(Vec::new());
                         lines = buffer.len();
                     }
-                    cl = buffer[ln].len();
+                    if buffer[ln].len() < cl {
+                        cl = buffer[ln].len();
+                    }
                 }
                 10 => {
                     // ENTER
