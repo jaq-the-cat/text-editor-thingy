@@ -50,6 +50,21 @@ fn main() {
                     }
                     cl = buffer[ln].len();
                 }
+                c::KEY_ENTER => {
+                    // ENTER
+                    ln += 1;
+                    if ln >= lines {
+                        buffer.push(Vec::new());
+                        lines = buffer.len();
+                    }
+                    cl = buffer[ln].len();
+                }
+                9 => {
+                    for _ in 0..4 {
+                        buffer[ln].push(' ' as u32);
+                        cl += 1;
+                    }
+                }
                 c::KEY_LEFT => {
                     if cl > 0 {
                         cl -= 1;
