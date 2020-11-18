@@ -94,13 +94,17 @@ fn main() {
             }
             c::mv(c::getcury(w) + 1, 0);
         }
+        save(&args[1][..], &buffer);
         c::mv(ln as i32, cl as i32);
         c::refresh();
         sleep(Duration::from_millis(20));
         c::clear();
     }
     c::endwin();
-    let mut f = File::create(&args[1][..]).unwrap();
+}
+
+fn save(filename: &str, buffer: &Vec<Vec<u32>>) {
+    let mut f = File::create(filename).unwrap();
     for line in buffer.iter() {
         for ch in line {
             f.write(&[*ch as u8]).unwrap();
