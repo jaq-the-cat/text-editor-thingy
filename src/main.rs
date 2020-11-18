@@ -50,7 +50,7 @@ fn main() {
                     }
                     cl = buffer[ln].len();
                 }
-                c::KEY_ENTER => {
+                10 => {
                     // ENTER
                     ln += 1;
                     if ln >= lines {
